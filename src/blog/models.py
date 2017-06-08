@@ -15,6 +15,10 @@ class PublishedManager(models.Manager):
 	def get_queryset(self):
 		return super(PublishedManager, self).get_queryset().filter(status='published')
 
+def upload_location(objects, filename):
+	# filebase, extension = filename.split(".")
+	# return "%s/%s.%s" %(instance.id, instance.id, extension)
+	return "%s/%s" %(objects.id, filename)
 
 
 class Post(models.Model):
@@ -27,6 +31,13 @@ class Post(models.Model):
 	slug = models.SlugField(max_length=250, unique_for_date='publish')
 	author = models.ForeignKey(User, related_name='blog_posts')
 	body = models.TextField()
+	image = models.ImageField(upload_to=upload_location,
+			null=True,
+			blank=True, 
+			width_field= "width_field",
+			height_field="height_field")
+	height_field = models.IntegerField(default=0)
+	width_field = models.IntegerField(default=0)
 	publish = models.DateTimeField(default=timezone.now)
 	created = models.DateTimeField(auto_now_add=True)
 	updated = models.DateTimeField(auto_now=True)

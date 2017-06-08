@@ -11,7 +11,11 @@
 <p class="date">
 	Published {{ post.publish }} by {{ post.author }}
 </p>
-	
+
+	{% if post.image %}
+	<img src="{{ post.image.url }}" class="img-responsive">
+	{% endif %}
+
 	{{ post.body|linebreaks }}
 
 	<p>

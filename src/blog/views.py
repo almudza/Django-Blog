@@ -17,6 +17,8 @@ from taggit.models import Tag
 
 from django.db.models import Count
 
+from django.db.models import Q
+
 
 
 
@@ -25,6 +27,17 @@ from django.db.models import Count
 def post_list(request, tag_slug=None):
 	object_list = Post.published.all()
 	tag = None
+	
+
+
+	query = request.GET.get("q")
+	if query:
+		object_list = object_list.filter(
+				Q(title__icontains = query) |
+				Q(body__icontains = query) |
+				Q(author__first_name__icontains = query) |
+				Q(author__last_name__icontains = query)				
+				).distinct()
 
 
 	if tag_slug:
@@ -33,6 +46,9 @@ def post_list(request, tag_slug=None):
 
 
 	paginator = Paginator(object_list, 3) # 3 post in each page 
+	
+	
+	
 	page = request.GET.get('page')
 	try:
 		posts = paginator.page(page)

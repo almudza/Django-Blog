@@ -1,7 +1,7 @@
 <nav class="blog-pagination">
 			<span class="step-links">
 			{% if page.has_previous %}
-            <a class="btn btn-outline-primary" href="?page={{ page.previous_page_number }}">Back</a>
+            <a class="btn btn-outline-primary" href="?page={{ page.previous_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Back</a>
             {% endif %}
            
 
@@ -9,7 +9,7 @@
 
 
             {% if page.has_next %}
-            <a class="btn btn-outline-success" href="?page={{ page.next_page_number }}">Next</a>
+            <a class="btn btn-outline-success" href="?page={{ page.next_page_number }}{% if request.GET.q %}&q={{ request.GET.q }}{% endif %}">Next</a>
             {% endif %}
             </span>
           </nav>
