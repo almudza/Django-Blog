@@ -1,0 +1,53 @@
+{% load staticfiles %}
+
+
+<nav class="navbar navbar-toggleable-md navbar-light bg-faded">
+  <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a href="{% url 'home' %}"><img src="{% static 'img/zifza.png' %}" class='navbar-brand'/></a>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      {% url 'home' as home %}
+      {% url 'about' as about %}
+      
+      <li {% if request.path == home %} class="nav-item active" {% endif %}>
+        <a class="nav-link" href="{% url 'home' %}">Home</a>
+      </li>
+      <li {% if request.path == about %} class="nav-item active" {% endif %}>
+        <a class="nav-link" href="{% url 'about' %}">About</a>
+      </li>
+
+      <li {% if request.path == blog %} class="nav-item active" {% endif %}>
+        <a class="nav-link" href="/blog">Blog</a>
+      </li>
+     
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+
+
+
+
+         
+          
+
+
+<!-- <div class="blog-masthead">
+  <div class="container">
+    <nav class="nav blog-nav">
+        {% url 'home' as home %}
+        {% url 'about' as about %}
+          <a {% if request.path == home %} class="nav-link active" {% endif %} href="{% url 'home' %}">Home</a>
+          <a {% if request.path == about %} class="nav-link active" {% endif %} href="{% url 'about' %}">about</a>
+          <a class="nav-link" href="#">Press</a>
+          <a class="nav-link" href="#">New hires</a>
+          <a class="nav-link" href="#">About</a>
+    </nav>
+  </div>
+</div> -->
