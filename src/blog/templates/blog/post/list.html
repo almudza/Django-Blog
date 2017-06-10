@@ -1,4 +1,4 @@
-{% extends "base.html" %}
+{% extends "blog/blog.html" %}
 
 {% block title %} my blog {% endblock %}
 
@@ -7,13 +7,14 @@
 
 {% block content %}
 
+{% if tag %}
+		<h2>Posts tagged with "{{ tag.name }}"</h2>
+	{% endif %}
+	<hr>
 
 {% for post in posts %}
 	
-	{% if tag %}
-		<h2>Posts tagged with "{{ tag.name }}</h2>
-	{% endif %}
-
+	
 	<h2>
 		<a href="{{ post.get_absolute_url }} ">{{ post.title}} </a>
 	</h2>
@@ -39,8 +40,12 @@
 	{% if post.image %}
 	<img src="{{ post.image.url }}" class="img-responsive">
 	{% endif %}
+
+	<hr>
+
 	
-	{{ post.body|truncatewords:30|linebreaks }}
+	<!-- {{ post.get_markdown|truncatewords_html:30 }} -->
+	
 {% endfor %}
 
 

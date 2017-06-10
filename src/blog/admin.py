@@ -2,6 +2,10 @@ from django.contrib import admin
 
 # Register your models here.
 from .models import Post, Comment
+from django.db import models
+
+from pagedown.widgets import AdminPagedownWidget
+
 
 # Class Post
 class PostAdmin(admin.ModelAdmin):
@@ -13,6 +17,9 @@ class PostAdmin(admin.ModelAdmin):
 	raw_id_fields = ('author',)
 	date_hierarchy = 'publish'
 	ordering = ['status', 'publish']
+	formfield_overrides = {
+		models.TextField: {'widget': AdminPagedownWidget}
+	}
 
 
 admin.site.register(Post, PostAdmin)

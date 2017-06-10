@@ -45,7 +45,7 @@ def post_list(request, tag_slug=None):
 		object_list = object_list.filter(tags__in=[tag])
 
 
-	paginator = Paginator(object_list, 3) # 3 post in each page 
+	paginator = Paginator(object_list, 7) # 3 post in each page 
 	
 	
 	

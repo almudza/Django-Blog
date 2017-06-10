@@ -44,9 +44,13 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    #app
     'blog',
     'home',
+    # third library
     'taggit',
+    'pagedown',
+    'markdown_deux',
 )
 
 MIDDLEWARE_CLASSES = (

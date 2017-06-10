@@ -8,8 +8,9 @@ from django.core.urlresolvers import reverse
 
 from taggit.managers import TaggableManager
 
+from markdown_deux import markdown
 
-
+from django.utils.safestring import mark_safe
 
 class PublishedManager(models.Manager):
 	def get_queryset(self):
@@ -59,6 +60,11 @@ class Post(models.Model):
 						self.publish.strftime('%m'),
 						self.publish.strftime('%d'),
 						self.slug])
+
+	def get_markdown(self):
+		body = self.body
+		markdown_text = markdown(body)
+		return mark_safe(markdown_text)
 
 
 

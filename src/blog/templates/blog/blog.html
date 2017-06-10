@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
+    
     <link rel="icon" href="{% static 'img/zifza.ico' %}">
 
     <title> {% block title %}  {% endblock %} </title>
@@ -22,7 +23,7 @@
 
   <body>
 
-    {% include 'navbar.html' %}
+    {% include 'navbarblog.html' %}
 
     <div class="blog-header">
       <div class="container">
@@ -32,6 +33,16 @@
     </div>
 
     <div class="container">
+
+      <ol class="breadcrumb">
+        <li>
+          <a href='{% url "blog:post_list" %}'>Blog</a>
+          {% block post_detail_link %}
+
+          {% endblock %}
+        </li>
+        
+      </ol>
 
       <div class="row">
 
@@ -48,7 +59,31 @@
 
         </div><!-- /.blog-main -->
 
+        <div class="col-sm-3 offset-sm-1 blog-sidebar">
+          <div class="sidebar-module sidebar-module-inset">
+            <h4>My Blog</h4>
+            <p>This is my blog. I've eritten {% total_posts %} posts so far. </p>
+          </div>
+
+           <div class="sidebar-module">
+            <h4>Latest Post</h4>
+            <ol class="list-unstyled">
+            <p>
+              {% show_latest_posts 5 %}
+            </p>                   
+            </ol>
+          </div>
+
         
+          <div class="sidebar-module">
+            <h4>Elsewhere</h4>
+            <ol class="list-unstyled">
+              <li><a href="#">GitHub</a></li>
+              <li><a href="#">Twitter</a></li>
+              <li><a href="#">Facebook</a></li>
+            </ol>
+          </div>
+        </div><!-- /.blog-sidebar -->
 
       </div><!-- /.row -->
 
@@ -70,6 +105,26 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
     
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/0.3.6/marked.min.js"></script>
  
+
+<!--  <script type="text/javascript">
+  $(document).ready(function(){
+    $(".content-markdown").each(function(){
+         var content = $(this).text()
+         var markedContent = marked(content)
+         $(this).html(markedContent)
+      })
+    $(".markdown_text img").each(function(){
+          $(this).addClass("img-responsive")
+      
+      })
+   })
+   
+
+
+ </script> -->
+  
   </body>
 </html>
